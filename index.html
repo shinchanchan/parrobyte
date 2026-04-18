@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Parrobyte - Smart Digital Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        :root {
+            --cream: #f5f5f0;
+            --cream-warm: #e8e6e1;
+            --cyan: #00d4ff;
+            --cyan-deep: #0891b2;
+            --violet: #7c3aed;
+            --violet-deep: #4c1d95;
+        }
+        
+        /* ===== HERO ANIMATIONS ===== */
+        .hero-gradient {
+    background: linear-gradient(-45deg, #ec4899, #ec4899, #164e63, #ec4899);
+    background-size: 400% 400%;
+    animation: heroGradient 20s ease infinite;
+}
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            animation: orbitRotate 20s linear infinite;
+        }
+        
+        @keyframes orbitRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .orbit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--cyan);
+        }
+        
+        /* ===== GLASS MORPHISM ===== */
+        .glass-panel {
+            background: rgba(245, 245, 240, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(245, 245, 240, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(245, 245, 240, 0.05) 0%, rgba(245, 245, 240, 0.02) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(245, 245, 240, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        /* ===== TEXT EFFECTS ===== */
+        .text-cream { color: #f5f5f0; }
+        .text-cream-muted { color: #a3a29d; }
+        .text-cream-soft { color: #d4d3cf; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #00d4ff 50%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientText 5s ease infinite;
+        }
+        
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .glow-cyan {
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3), 0 0 120px rgba(124, 58, 237, 0.2);
+        }
+        
+        /* ===== FLOATING ANIMATIONS ===== */
+        .float-gentle {
+            animation: floatGentle 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .float-delay-1 { animation-delay: 1s; }
+        .float-delay-2 { animation-delay: 2s; }
+        .float-delay-3 { animation-delay: 3s; }
+        
+        /* ===== PARTICLE SYSTEM ===== */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .particle-cyan {
+            background: radial-gradient(circle, rgba(0,212,255,0.8) 0%, transparent 70%);
+            animation: particleFloat 15s infinite;
+        }
+        
+        .particle-violet {
+            background: radial-gradient(circle, rgba(124,58,237,0.6) 0%, transparent 70%);
+            animation: particleFloat 20s infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) translateX(50px) scale(1.5); opacity: 0; }
+        }
+        
+        /* ===== SCROLL REVEAL ===== */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* ===== CARD HOVER EFFECTS ===== */
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .hover-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 212, 255, 0.25);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        /* ===== BUTTON EFFECTS ===== */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .btn-shine:hover::after {
+            animation: btnShine 0.75s ease-out;
+        }
+        
+        @keyframes btnShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        /* ===== PORTFOLIO CARD ===== */
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-item .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-item .portfolio-img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        /* ===== FEATURE ACCENT ===== */
+        .feature-glow {
+            position: relative;
+        }
+        
+        .feature-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(124,58,237,0.5), rgba(0,212,255,0.5));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            filter: blur(8px);
+        }
+        
+        .feature-glow:hover::before {
+            opacity: 1;
+        }
+        
+        /* ===== TESTIMONIAL ===== */
+        .testimonial-blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: blobMove 10s infinite alternate;
+        }
+        
+        @keyframes blobMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
+        }
+        
+        /* ===== MARQUEE ===== */
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* ===== MOBILE OPTIMIZATIONS ===== */
+        @media (max-width: 768px) {
+            .hero-gradient {
+                background-size: 600% 600%;
+            }
+            
+            .orbit {
+                display: none;
+            }
+            
+            .parrot-float {
+                animation-duration: 6s;
+            }
+            
+            .glass-card {
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+        }
+        
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #7c3aed, #00d4ff);
+            border-radius: 4px;
+        }
+        
+        /* ===== LOADING ANIMATION ===== */
+        .loading-ring {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .loading-ring:after {
+            content: " ";
+            display: block;
+            width: 16px;
+            height: 16px;
+            margin: 2px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: loadingRing 1.2s linear infinite;
+        }
+        
+        @keyframes loadingRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-cream antialiased overflow-x-hidden">
+
+    <!-- Dynamic Particle Background -->
+    <div id="particleContainer" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed top-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10">
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-600 to-cyan-500 rounded-xl rotate-3 group-hover:rotate-6 transition-transform"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-cyan-400 rounded-xl flex items-center justify-center">
+                            <i data-lucide="bird" class="w-5 h-5 text-cream"></i>
+                        </div>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">
+                        <span class="text-cream">Parro</span><span class="text-cyan-400">byte</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="#work" class="px-4 py-2 rounded-lg text-sm font-medium text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Our Work</a>
+                    <a href="#features" class="px-4 py-2 rounded-lg text-sm font-medium text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Features</a>
+                    <a href="#vision" class="px-4 py-2 rounded-lg text-sm font-medium text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Vision</a>
+                    <a href="#contact" class="px-4 py-2 rounded-lg text-sm font-medium text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Contact</a>
+                </div>
+
+                <!-- CTA -->
+                <a href="https://wa.me/916380463408" target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-cream text-sm font-semibold hover:scale-105 transition-transform btn-shine shadow-lg shadow-emerald-500/20">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Book Now</span>
+                </a>
+
+                <!-- Mobile Toggle -->
+                <button onclick="toggleMenu()" class="md:hidden p-2 text-cream hover:bg-white/10 rounded-lg transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-nav border-t border-white/10">
+            <div class="px-4 py-6 space-y-2">
+                <a href="#work" onclick="toggleMenu()" class="block px-4 py-3 rounded-xl text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Our Work</a>
+                <a href="#features" onclick="toggleMenu()" class="block px-4 py-3 rounded-xl text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Features</a>
+                <a href="#vision" onclick="toggleMenu()" class="block px-4 py-3 rounded-xl text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Vision</a>
+                <a href="#contact" onclick="toggleMenu()" class="block px-4 py-3 rounded-xl text-cream-muted hover:text-cream hover:bg-white/5 transition-all">Contact</a>
+                <a href="https://wa.me/916380463408" class="flex items-center justify-center gap-2 mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 text-cream font-semibold">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    <span>Book Appointment</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 hero-gradient">
+        <!-- Orbital Rings -->
+        <div class="orbit w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block">
+            <div class="orbit-dot top-0 left-1/2 -translate-x-1/2"></div>
+        </div>
+        <div class="orbit w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block" style="animation-duration: 30s; animation-direction: reverse;">
+            <div class="orbit-dot bottom-0 left-1/2 -translate-x-1/2" style="background: var(--violet); box-shadow: 0 0 20px var(--violet);"></div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            <!-- Left: Text Content -->
+            <div class="text-center lg:text-left space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel reveal-up">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-xs font-medium text-cream-soft tracking-wide uppercase">Available for Projects</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight reveal-up" style="transition-delay: 0.1s;">
+                    <span class="block text-cream">Smart Digital</span>
+                    <span class="block gradient-text mt-2">Solutions</span>
+                    <span class="block text-cream-soft mt-2 text-3xl sm:text-4xl md:text-5xl font-bold">for Your Business</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-cream-muted max-w-xl mx-auto lg:mx-0 leading-relaxed reveal-up" style="transition-delay: 0.2s;">
+                    Websites, Automation, Voice Apps & Custom Software – Built Simple with Parrobyte
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal-up" style="transition-delay: 0.3s;">
+                    <a href="https://wa.me/916380463408" target="_blank" class="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-cream font-bold text-lg hover:scale-105 transition-all btn-shine shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-3">
+                        <i data-lucide="message-circle" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                        <span>Chat on WhatsApp</span>
+                    </a>
+                    <a href="#work" class="group px-8 py-4 rounded-2xl glass-panel text-cream font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2 border border-white/10">
+                        <span>View Our Work</span>
+                        <i data-lucide="arrow-down-right" class="w-5 h-5 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 reveal-up" style="transition-delay: 0.4s;">
+                    <div>
+                        <div class="text-2xl md:text-3xl font-bold text-cyan-400">4+</div>
+                        <div class="text-xs md:text-sm text-cream-muted mt-1">Projects Done</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-bold text-violet-400">100%</div>
+                        <div class="text-xs md:text-sm text-cream-muted mt-1">Client Satisfaction</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl md:text-3xl font-bold text-emerald-400">24/7</div>
+                        <div class="text-xs md:text-sm text-cream-muted mt-1">Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Visual -->
+            <div class="relative flex justify-center items-center reveal-scale">
+                <!-- Main Parrot -->
+                <div class="relative w-72 h-72 md:w-96 md:h-96 float-gentle">
+                    <div class="absolute inset-0 bg-gradient-to-br from-violet-500/30 to-cyan-500/30 rounded-full blur-3xl scale-75 animate-pulse"></div>
+                    <img src="https://raw.githubusercontent.com/shinchanchan/vallarasu_portfolio/main/logo.png" 
+                         alt="Parrobyte Mascot" 
+                         class="relative w-full h-full object-contain drop-shadow-2xl"
+                         style="filter: drop-shadow(0 20px 40px rgba(124, 58, 237, 0.3));">
+                </div>
+
+                <!-- Floating Cards -->
+                <div class="absolute -left-4 top-1/4 glass-card p-3 rounded-xl float-gentle float-delay-1 hidden sm:block">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                            <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold">WhatsApp</div>
+                            <div class="text-[10px] text-cream-muted">Auto-reply Active</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute -right-4 top-1/3 glass-card p-3 rounded-xl float-gentle float-delay-2 hidden sm:block">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-violet-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold">Analytics</div>
+                            <div class="text-[10px] text-cream-muted">Live Tracking</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute left-1/4 -bottom-4 glass-card p-3 rounded-xl float-gentle float-delay-3 hidden sm:block">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-4 h-4 text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-semibold">Automation</div>
+                            <div class="text-[10px] text-cream-muted">Workflows Running</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Gradient Fade -->
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent"></div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="relative py-24 md:py-32 bg-slate-950 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-20 reveal-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-cyan-400 text-xs font-bold tracking-wider uppercase mb-4 border border-cyan-500/20">Portfolio</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-cream mb-4">Featured Work</h2>
+                <p class="text-cream-muted text-lg max-w-2xl mx-auto">Real projects delivering real results for fireworks businesses</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Project 1 -->
+                <a href="https://redmooncrackers.co.in" target="_blank" class="portfolio-item group rounded-3xl overflow-hidden glass-card hover-card reveal-up">
+                    <div class="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-red-950 to-orange-950">
+                        <!--div class="absolute inset-0 flex items-center justify-center z-10">
+                            <i data-lucide="flame" class="w-20 h-20 text-orange-500/30"></i>
+                        </div-->
+                        <img src="https://raw.githubusercontent.com/shinchanchan/vallarasu_portfolio/main/redmoon.png" 
+                             alt="Red Moon" class="portfolio-img w-full h-full object-cover opacity-40">
+                        <div class="portfolio-overlay flex flex-col justify-end p-6 md:p-8">
+                            <span class="inline-block w-fit px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs font-bold mb-3 border border-orange-500/30">Fireworks E-commerce</span>
+                            <h3 class="text-2xl font-bold text-cream mb-2">Red Moon Crackers</h3>
+                            <ul class="space-y-1.5 text-sm text-cream-soft mb-4">
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Easy product browsing</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Fast checkout</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Invoice generation</li>
+                            </ul>
+                            <div class="flex items-center gap-2 text-cyan-400 font-semibold text-sm group-hover:gap-3 transition-all">
+                                Visit Website <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://srikrishnacrackers.shop" target="_blank" class="portfolio-item group rounded-3xl overflow-hidden glass-card hover-card reveal-up" style="transition-delay: 0.1s;">
+                    <div class="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-blue-950 to-indigo-950">
+                        <!--div class="absolute inset-0 flex items-center justify-center z-10">
+                            <i data-lucide="sparkles" class="w-20 h-20 text-blue-500/30"></i>
+                        </div-->
+                        <img src="https://raw.githubusercontent.com/shinchanchan/vallarasu_portfolio/main/srikrish.png" 
+                             alt="Sri Krishna" class="portfolio-img w-full h-full object-cover opacity-40">
+                        <div class="portfolio-overlay flex flex-col justify-end p-6 md:p-8">
+                            <span class="inline-block w-fit px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold mb-3 border border-blue-500/30">Fireworks E-commerce</span>
+                            <h3 class="text-2xl font-bold text-cream mb-2">Sri Krishna Crackers</h3>
+                            <ul class="space-y-1.5 text-sm text-cream-soft mb-4">
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Easy product browsing</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Fast checkout</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Invoice generation</li>
+                            </ul>
+                            <div class="flex items-center gap-2 text-cyan-400 font-semibold text-sm group-hover:gap-3 transition-all">
+                                Visit Website <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://veeracrackers.co.in" target="_blank" class="portfolio-item group rounded-3xl overflow-hidden glass-card hover-card reveal-up" style="transition-delay: 0.2s;">
+                    <div class="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-yellow-950 to-amber-950">
+                        <!--div class="absolute inset-0 flex items-center justify-center z-10">
+                            <i data-lucide="crown" class="w-20 h-20 text-yellow-500/30"></i>
+                        </div-->
+                        <img src="https://raw.githubusercontent.com/shinchanchan/vallarasu_portfolio/main/veera.png" 
+                             alt="Veera" class="portfolio-img w-full h-full object-cover opacity-40">
+                        <div class="portfolio-overlay flex flex-col justify-end p-6 md:p-8">
+                            <span class="inline-block w-fit px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold mb-3 border border-yellow-500/30">Fireworks E-commerce</span>
+                            <h3 class="text-2xl font-bold text-cream mb-2">Veera Crackers</h3>
+                            <ul class="space-y-1.5 text-sm text-cream-soft mb-4">
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Easy product browsing</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Fast checkout</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Invoice generation</li>
+                            </ul>
+                            <div class="flex items-center gap-2 text-cyan-400 font-semibold text-sm group-hover:gap-3 transition-all">
+                                Visit Website <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative py-24 md:py-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950"></div>
+        <div class="absolute top-1/4 -left-32 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 -right-32 w-64 h-64 bg-cyan-600/20 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-20 reveal-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-violet-400 text-xs font-bold tracking-wider uppercase mb-4 border border-violet-500/20">Capabilities</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-cream mb-4">Powerful Features</h2>
+                <p class="text-cream-muted text-lg max-w-2xl mx-auto">Everything your business needs to thrive online</p>
+            </div>
+
+            <!-- E-commerce Grid -->
+            <div class="mb-16 reveal-up">
+                <h3 class="text-xl md:text-2xl font-bold text-cream mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 text-cream"></i>
+                    </span>
+                    E-commerce Excellence
+                </h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-violet-600/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="mouse-pointer-2" class="w-6 h-6 text-violet-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Easy Purchase Flow</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Streamlined checkout designed for maximum conversions</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="receipt" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">GST Invoice</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Automatic GST-compliant invoice generation</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="play" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Rich Media Preview</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Product videos and image galleries</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="smartphone" class="w-6 h-6 text-emerald-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Mobile-First</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Perfect experience on every device</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Communication Grid -->
+            <div class="mb-16 reveal-up">
+                <h3 class="text-xl md:text-2xl font-bold text-cream mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-cream"></i>
+                    </span>
+                    Communication & Tools
+                </h3>
+                <div class="grid sm:grid-cols-3 gap-4 md:gap-6">
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="message-square" class="w-6 h-6 text-emerald-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">WhatsApp Automation</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Instant notifications and order updates</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="bot" class="w-6 h-6 text-violet-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">AI Responses</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Smart auto-replies for common queries</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="megaphone" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Campaign Management</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">Targeted marketing automation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Products -->
+            <div class="reveal-up">
+                <h3 class="text-xl md:text-2xl font-bold text-cream mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                        <i data-lucide="rocket" class="w-5 h-5 text-cream"></i>
+                    </span>
+                    Advanced Products
+                </h3>
+                <div class="grid sm:grid-cols-3 gap-4 md:gap-6">
+                    <a href="https://shinchanchan.github.io/voicecall/" target="_blank" class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="phone-call" class="w-6 h-6 text-orange-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Voice Call Web App</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed mb-3">Real-time browser-based calling</p>
+                        <span class="inline-flex items-center gap-1 text-xs text-cyan-400 font-medium">
+                            View Demo <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </span>
+                    </a>
+                    <div class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="headphones" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">Audio Calling</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed">High-quality audio infrastructure</p>
+                    </div>
+                    <a href="https://shinchanchan.github.io/file_share/" target="_blank" class="glass-card p-6 rounded-2xl hover-card feature-glow group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="share-2" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <h4 class="font-semibold text-cream mb-2">File Sharing</h4>
+                        <p class="text-sm text-cream-muted leading-relaxed mb-3">Cross-platform file transfer</p>
+                        <span class="inline-flex items-center gap-1 text-xs text-cyan-400 font-medium">
+                            View Demo <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Vision Section -->
+    <section id="vision" class="relative py-24 md:py-32 bg-slate-950 overflow-hidden">
+        <!-- Animated Blobs -->
+        <div class="testimonial-blob bg-violet-600 top-20 -left-20 hidden md:block"></div>
+        <div class="testimonial-blob bg-cyan-600 bottom-20 -right-20 hidden md:block" style="animation-delay: -5s;"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-20 reveal-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-cyan-400 text-xs font-bold tracking-wider uppercase mb-4 border border-cyan-500/20">Roadmap</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-cream mb-4">Future Vision</h2>
+                <p class="text-cream-muted text-lg max-w-2xl mx-auto">What's next for Parrobyte</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="relative group reveal-up">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-3xl opacity-0 group-hover:opacity-50 blur transition duration-500"></div>
+                    <div class="relative glass-card p-8 rounded-3xl h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center mb-6 glow-cyan">
+                            <i data-lucide="smartphone" class="w-7 h-7 text-cream"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-cream mb-3">Mobile Apps</h3>
+                        <p class="text-cream-muted leading-relaxed mb-6">Native iOS & Android applications with cutting-edge performance and seamless user experience.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-medium border border-violet-500/20">iOS</span>
+                            <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-medium border border-violet-500/20">Android</span>
+                            <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-medium border border-violet-500/20">Flutter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="relative group reveal-up" style="transition-delay: 0.15s;">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-600 to-teal-600 rounded-3xl opacity-0 group-hover:opacity-50 blur transition duration-500"></div>
+                    <div class="relative glass-card p-8 rounded-3xl h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center mb-6 glow-cyan">
+                            <i data-lucide="monitor" class="w-7 h-7 text-cream"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-cream mb-3">Desktop Software</h3>
+                        <p class="text-cream-muted leading-relaxed mb-6">Powerful GST Billing Systems and inventory management for Windows, Mac, and Linux.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-medium border border-cyan-500/20">GST Billing</span>
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-medium border border-cyan-500/20">Inventory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="relative group reveal-up" style="transition-delay: 0.3s;">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-teal-600 to-emerald-600 rounded-3xl opacity-0 group-hover:opacity-50 blur transition duration-500"></div>
+                    <div class="relative glass-card p-8 rounded-3xl h-full">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center mb-6 glow-cyan">
+                            <i data-lucide="globe" class="w-7 h-7 text-cream"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-cream mb-3">Cross-Platform</h3>
+                        <p class="text-cream-muted leading-relaxed mb-6">Unified communication tools working seamlessly across all devices and operating systems.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-xs font-medium border border-teal-500/20">Real-time</span>
+                            <span class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-xs font-medium border border-teal-500/20">Secure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Development CTA -->
+    <section class="relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-950/50 via-slate-950 to-cyan-950/50"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-8 md:p-16 rounded-3xl border border-white/10 text-center reveal-up">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 mb-8 glow-cyan float-gentle">
+                    <i data-lucide="lightbulb" class="w-10 h-10 text-cream"></i>
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-bold text-cream mb-4">Have an idea?</h2>
+                <p class="text-2xl md:text-4xl font-bold gradient-text mb-8">We will build it!</p>
+                <p class="text-cream-muted text-lg md:text-xl max-w-2xl mx-auto mb-12">
+                    From concept to launch, we handle everything. Your vision, our expertise.
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 max-w-3xl mx-auto">
+                    <div class="glass-panel p-4 rounded-2xl text-center group hover:border-cyan-500/30 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i data-lucide="search" class="w-5 h-5 text-violet-400"></i>
+                        </div>
+                        <span class="text-sm font-medium text-cream">Idea Validation</span>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl text-center group hover:border-cyan-500/30 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i data-lucide="code-2" class="w-5 h-5 text-cyan-400"></i>
+                        </div>
+                        <span class="text-sm font-medium text-cream">Development</span>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl text-center group hover:border-cyan-500/30 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i data-lucide="test-tube" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <span class="text-sm font-medium text-cream">Testing</span>
+                    </div>
+                    <div class="glass-panel p-4 rounded-2xl text-center group hover:border-cyan-500/30 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i>
+                        </div>
+                        <span class="text-sm font-medium text-cream">Deployment</span>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/916380463408" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-500 to-cyan-500 text-cream font-bold text-lg hover:scale-105 transition-all btn-shine shadow-xl shadow-violet-500/25">
+                    <span>Start Your Project</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Video Section -->
+    <section class="relative py-24 md:py-32 bg-slate-950">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative rounded-3xl overflow-hidden aspect-video glass-card reveal-up group cursor-pointer" onclick="playVideo()">
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-900/80 via-slate-900/80 to-cyan-900/80">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center z-10">
+                            <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-cream/10 backdrop-blur-xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform border border-cream/20">
+                                <i data-lucide="play" class="w-8 h-8 md:w-10 md:h-10 text-cream ml-1"></i>
+                            </div>
+                            <p class="text-cream font-medium text-lg">Watch Our Story</p>
+                        </div>
+                    </div>
+                    <!-- Animated Background -->
+                    <div class="absolute inset-0 opacity-40">
+                        <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-violet-500 rounded-full blur-3xl animate-pulse"></div>
+                        <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-cyan-500 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500 rounded-full blur-3xl animate-pulse" style="animation-delay: 0.5s;"></div>
+                    </div>
+                </div>
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-8 md:p-12">
+                    <div>
+                        <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold text-cream mb-3">Build Your Dream Project with Us</h2>
+                        <p class="text-cream-muted text-base md:text-lg">See how we transform ideas into reality</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-20 reveal-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-amber-400 text-xs font-bold tracking-wider uppercase mb-4 border border-amber-500/20">Testimonials</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-cream mb-4">Client Feedback</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-3xl reveal-up hover-card">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                    </div>
+                    <p class="text-cream-soft leading-relaxed mb-8">"Parrobyte transformed our fireworks business completely. The e-commerce site increased our Diwali sales by 300%. Incredible work!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center text-cream font-bold text-lg">R</div>
+                        <div>
+                            <div class="font-semibold text-cream">Red Moon Crackers</div>
+                            <div class="text-sm text-cream-muted">Sivakasi, TN</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-3xl reveal-up hover-card" style="transition-delay: 0.1s;">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                    </div>
+                    <p class="text-cream-soft leading-relaxed mb-8">"The WhatsApp automation is a game-changer. Our customers love instant order updates. Highly professional team!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-violet-600 flex items-center justify-center text-cream font-bold text-lg">S</div>
+                        <div>
+                            <div class="font-semibold text-cream">Sri Krishna Crackers</div>
+                            <div class="text-sm text-cream-muted">Selam, TN</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card p-8 rounded-3xl reveal-up hover-card" style="transition-delay: 0.2s;">
+                    <div class="flex gap-1 mb-6">
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                    </div>
+                    <p class="text-cream-soft leading-relaxed mb-8">"Fast, reliable, and excellent support. The website loads incredibly quick. Best investment for our business growth."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center text-cream font-bold text-lg">V</div>
+                        <div>
+                            <div class="font-semibold text-cream">Veera Crackers</div>
+                            <div class="text-sm text-cream-muted">Sivakasi, TN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp CTA Section -->
+    <section class="relative py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/50 via-slate-950 to-teal-950/50"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-up">
+            <div class="glass-card p-8 md:p-16 rounded-3xl border border-emerald-500/20">
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center mx-auto mb-8 whatsapp-pulse">
+                    <i data-lucide="message-circle" class="w-10 h-10 md:w-12 md:h-12 text-cream"></i>
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-bold text-cream mb-4">Talk to Us on WhatsApp</h2>
+                <p class="text-cream-muted text-lg md:text-xl mb-8 max-w-2xl mx-auto">Get instant response and book your appointment with Vallarasu</p>
+                
+                <a href="https://wa.me/916380463408" target="_blank" class="inline-flex items-center gap-3 px-8 md:px-10 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-cream font-bold text-lg md:text-xl hover:scale-105 transition-all btn-shine shadow-2xl shadow-emerald-500/30 mb-8">
+                    <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                    <span>Book Appointment with Vallarasu</span>
+                </a>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-cream-muted">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="phone" class="w-5 h-5 text-emerald-400"></i>
+                        <span class="font-medium">+91 6380463408</span>
+                    </div>
+                    <div class="hidden sm:block w-1.5 h-1.5 rounded-full bg-cream-muted/50"></div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-emerald-400"></i>
+                        <span>Instant Reply</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 md:py-32 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 md:mb-20 reveal-up">
+                <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-cyan-400 text-xs font-bold tracking-wider uppercase mb-4 border border-cyan-500/20">Contact</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-cream mb-4">Get in Touch</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="glass-card p-8 rounded-2xl text-center hover-card reveal-up">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-600/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="user" class="w-8 h-8 text-violet-400"></i>
+                    </div>
+                    <h3 class="font-semibold text-cream mb-1">Name</h3>
+                    <p class="text-cream-muted">Vallarasu</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl text-center hover-card reveal-up" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="phone" class="w-8 h-8 text-emerald-400"></i>
+                    </div>
+                    <h3 class="font-semibold text-cream mb-1">Phone</h3>
+                    <p class="text-cream-muted">+91 6380463408</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl text-center hover-card reveal-up" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="mail" class="w-8 h-8 text-cyan-400"></i>
+                    </div>
+                    <h3 class="font-semibold text-cream mb-1">Email</h3>
+                    <p class="text-cream-muted">contact@parrobyte.com</p>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="mt-16 md:mt-20 text-center reveal-up">
+                <h3 class="text-xl md:text-2xl font-bold text-cream mb-8">Follow Our Journey</h3>
+                <div class="flex justify-center gap-4 md:gap-6">
+                    <a href="#" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl glass-panel flex items-center justify-center hover:bg-violet-500/20 hover:scale-110 transition-all group border border-white/10">
+                        <i data-lucide="instagram" class="w-6 h-6 text-cream-muted group-hover:text-violet-400 transition-colors"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl glass-panel flex items-center justify-center hover:bg-blue-500/20 hover:scale-110 transition-all group border border-white/10">
+                        <i data-lucide="facebook" class="w-6 h-6 text-cream-muted group-hover:text-blue-400 transition-colors"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl glass-panel flex items-center justify-center hover:bg-red-500/20 hover:scale-110 transition-all group border border-white/10">
+                        <i data-lucide="youtube" class="w-6 h-6 text-cream-muted group-hover:text-red-400 transition-colors"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 md:w-16 md:h-16 rounded-2xl glass-panel flex items-center justify-center hover:bg-blue-600/20 hover:scale-110 transition-all group border border-white/10">
+                        <i data-lucide="linkedin" class="w-6 h-6 text-cream-muted group-hover:text-blue-500 transition-colors"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-slate-950 border-t border-white/10 pt-16 md:pt-20 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 flex items-center justify-center">
+                            <i data-lucide="bird" class="w-5 h-5 text-cream"></i>
+                        </div>
+                        <span class="text-2xl font-bold">
+                            <span class="text-cream">Parro</span><span class="text-cyan-400">byte</span>
+                        </span>
+                    </a>
+                    <p class="text-cream-muted mb-6 max-w-sm leading-relaxed">Smart Digital Solutions for Your Business. Websites, Automation, Voice Apps & Custom Software.</p>
+                    <a href="https://wa.me/916380463408" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        WhatsApp Us
+                    </a>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-cream mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-cream-muted">
+                        <li><a href="#work" class="hover:text-cyan-400 transition-colors">Our Work</a></li>
+                        <li><a href="#features" class="hover:text-cyan-400 transition-colors">Features</a></li>
+                        <li><a href="#vision" class="hover:text-cyan-400 transition-colors">Vision</a></li>
+                        <li><a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-cream mb-4">Services</h4>
+                    <ul class="space-y-3 text-cream-muted">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Web Development</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">E-commerce</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">WhatsApp Automation</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Custom Software</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-cream-muted/60 text-sm">© 2024 Parrobyte. All rights reserved.</p>
+                <p class="text-cream-muted/60 text-sm flex items-center gap-2">
+                    Made with <i data-lucide="heart" class="w-4 h-4 text-red-400 fill-red-400"></i> in India
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/916380463408" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 transition-transform whatsapp-pulse group">
+        <i data-lucide="message-circle" class="w-7 h-7 md:w-8 md:h-8 text-cream"></i>
+        <span class="absolute right-full mr-4 px-4 py-2 rounded-xl bg-cream text-slate-900 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap shadow-xl">Chat Now</span>
+    </a>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        }
+
+        // Particle System
+        function initParticles() {
+            const container = document.getElementById('particleContainer');
+            const colors = ['rgba(0,212,255,0.4)', 'rgba(124,58,237,0.3)', 'rgba(6,182,212,0.3)'];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(particle);
+            }
+        }
+        initParticles();
+
+        // Scroll Reveal Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up, .reveal-scale, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        const nav = document.getElementById('mainNav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                nav.classList.add('glass-nav');
+            } else {
+                nav.classList.remove('glass-nav');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Video Play
+        function playVideo() {
+            alert('Video playback would start here. Replace with actual video element in production.');
+        }
+
+        // GSAP Animations (if GSAP loads)
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero parallax
+            gsap.to('.parrot-float', {
+                yPercent: 30,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        }
+
+        // Touch device detection for reduced motion
+        if (window.matchMedia('(pointer: coarse)').matches) {
+            document.documentElement.style.setProperty('--animation-duration', '0s');
+        }
+    </script>
+</body>
+</html>
